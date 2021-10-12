@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.contains;
 
 public class Pet {
     // 3.1 - Atributos (Caracteristicas)
@@ -44,6 +45,8 @@ public class Pet {
                 .statusCode(200)
                 .body("name", is("Puppy"))
                 .body("status", is("Vermifugado"))
+                .body("category.name", is("Dog"))
+                .body("tags.name", contains("Consulta"))
         ;
     }
 
