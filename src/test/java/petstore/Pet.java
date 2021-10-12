@@ -100,7 +100,7 @@ public class Pet {
     public void deletaPet(){
         String petId = "1982022811102021";
 
-        given() // Dado
+        given()
                 .contentType("application/json")
                 .log().all()
         .when()
@@ -109,6 +109,9 @@ public class Pet {
         .then()
                 .log().all()
                 .statusCode(200)
+                .body("code", is(200))
+                .body("type", is("unknown"))
+                .body("message", is(petId))
         ;
     }
 }
