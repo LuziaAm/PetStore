@@ -4,7 +4,7 @@
     "id": 1,
     "name": "AXLUHAM2021"
   },
-  "name": "Puppy",
+  "name": "Bob",
   "photoUrls": [
     "string"
   ],
@@ -14,5 +14,5 @@
       "name": "Consulta"
     }
   ],
-  "status": "Vermifugado"
+  "status": "Vacinado"
 }

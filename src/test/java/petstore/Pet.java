@@ -26,7 +26,7 @@ public class Pet {
     }
 
     // Incluir - Create - Post
-    @Test //Identifica o metodo ou funcao como Teste para o TestNG
+    @Test (priority = 1) //Identifica o metodo ou funcao como Teste para o TestNG
     public void incluirPet() throws IOException {
         String jsonBody = lerJson("db/pet1.json");
 
@@ -45,10 +45,71 @@ public class Pet {
                 .statusCode(200)
                 .body("name", is("Puppy"))
                 .body("status", is("Vermifugado"))
-                .body("category.name", is("Dog"))
+                .body("category.name", is("AXLUHAM2021"))
                 .body("tags.name", contains("Consulta"))
+
         ;
+
+    }
+    @Test (priority = 2)
+    public void consultarPet(){
+        String petId = "1982022811102021";
+
+        String token =
+
+        given() // Dado
+                .contentType("application/json")
+                .log().all()
+        .when()
+                .get(uri + "/" +petId)
+
+        .then()
+                .log().all()
+                .statusCode(200)
+                .body("name", is("Puppy"))
+                .body("category.name", is("AXLUHAM2021"))
+                .body("status", is("Vermifugado"))
+        .extract()
+                .path("category.name")
+        ;
+        System.out.println("Token é " + token);
+
     }
 
+    @Test (priority = 3)
+    public void alterarPet() throws IOException {
+        String jsonBody = lerJson("db/pet2.json");
+
+        given()
+                .contentType("application/json")
+                .log().all()
+                .body(jsonBody)
+        .when()
+                .put(uri)
+        .then()
+                .log().all()
+                .statusCode(200)
+                .body("name", is("Bob"))
+                .body("status", is("Vacinado"))
+    ;
+
+    }
+
+
+//    @Test (priority = 3)
+//    public void deletaPet() throws IOException {
+//        String petId = "1982022811102021";
+//
+//        given() // Dado
+//                .contentType("application/json")
+//                .log().all()
+//        .when()
+//                .delete(uri + "/" + petId)
+//
+//        .then()
+//                .log().all()
+//                .statusCode(200)
+//        ;
+//    }
 }
     
